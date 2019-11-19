@@ -1,7 +1,7 @@
 
 import pandas as pd
 
-traffic_df = pd.read_csv("Chicago_Traffic_2011-2018.csv", nrows = 2000)
+traffic_df = pd.read_csv("Chicago_Traffic_2011-2018.csv")
 
 # traffic_df.head()
 
