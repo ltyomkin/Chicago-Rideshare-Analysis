@@ -1,13 +1,11 @@
-#!/usr/bin/env python
-# coding: utf-8
 
 import pandas as pd
 
 traffic_df = pd.read_csv("Chicago_Traffic_2011-2018.csv", nrows = 2000)
 
-traffic_df.head()
+# traffic_df.head()
 
-traffic_df.dtypes
+# traffic_df.dtypes
 
 # Change names
 traffic_df.columns = ["timestamp_id",
