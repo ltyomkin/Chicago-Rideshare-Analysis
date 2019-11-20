@@ -31,3 +31,9 @@ def speed_condition(c):
 traffic_df["speed_category"] = traffic_df.apply(speed_condition, axis = 1)
 
 traffic_df["comments"] = ""
+
+# Reorder columns
+traffic_df = traffic_df[["segment_id","timestamp_id","speed","speed_category","comments","bus_count","gps_ping"]]
+
+# Export cleaned csv
+traffic_df.to_csv(r"Cleaned_Chicago_Traffic_2011-2018.csv")
