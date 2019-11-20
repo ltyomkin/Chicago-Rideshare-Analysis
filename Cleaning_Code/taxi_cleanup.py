@@ -1,14 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import pandas as pd
-
-
-# In[2]:
-
+from datetime import datetime, timedelta
 
 taxi_trip_df = pd.read_csv("Taxi_Trips.csv")
 
@@ -59,14 +50,15 @@ taxi_trip_df = ["taxi id",
                 "start_segment_id", 
                 "end_segment_id"]
 
-taxi_trip_df.start_timestamp_id = pd.to_datetime(taxi_trip_df.start_timestamp_id)
-taxi_trip_df.end_timestamp_id = pd.to_datetime(taxi_trip_df.end_timestamp_id)
+now = datetime.now()
+
+def hour_rounder(t):
+  return (t.replace(second=0, microsecond=0, minute=0, hour=t.hour) + timedelta(hours=t.minute//30)
+
+taxi_trip_df.start_timestamp_id = hour_rounder(pd.to_datetime(taxi_trip_df.start_timestamp_id))
+taxi_trip_df.end_timestamp_id = hour_rounder(pd.to_datetime(taxi_trip_df.end_timestamp_id))
 
 taxi_trip_df["ride_type_id"] = 1
 
-
-# In[ ]:
-
-
-
+taxi_trip_df.ro_csv(r"clean_taxi_trip_data.csv")
 
