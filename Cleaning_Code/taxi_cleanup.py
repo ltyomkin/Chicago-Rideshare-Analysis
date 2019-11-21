@@ -33,8 +33,8 @@ columns_to_add = ["ride_type_id",
                   "end_segment_id"] 
 
 taxi_trip_df.drop(columns_to_delete, axis = 1)
-taxi_trip_df = new_column_names
-taxi_trip_df = pd.concat([taxi_trip_df, columns_to_add])
+taxi_trip_df.columns = new_column_names
+taxi_trip_df = pd.concat([taxi_trip_df, columns_to_add], axis = 2)
 
 taxi_trip_df = ["taxi id",
                 "ride_type_id",
@@ -50,10 +50,8 @@ taxi_trip_df = ["taxi id",
                 "start_segment_id", 
                 "end_segment_id"]
 
-now = datetime.now()
-
 def hour_rounder(t):
-  return (t.replace(second=0, microsecond=0, minute=0, hour=t.hour) + timedelta(hours=t.minute//30)
+  return (t.replace(second=0, microsecond=0, minute=0, hour=t.hour) + timedelta(hours=t.minute//60)
 
 taxi_trip_df.start_timestamp_id = hour_rounder(pd.to_datetime(taxi_trip_df.start_timestamp_id))
 taxi_trip_df.end_timestamp_id = hour_rounder(pd.to_datetime(taxi_trip_df.end_timestamp_id))
