@@ -67,7 +67,7 @@ def speed_condition(c):
 traffic_df["speed_category"] = traffic_df.apply(speed_condition, axis = 1)
 
 # Reorder columns
-traffic_from2018 = traffic_df[["segment_id","timestamp_id","speed","speed_category","comments","bus_count","gps_ping"]]
+traffic_from2018 = traffic_df[["segment_id","timestamp_id","speed","speed_category","comments","bus_count","gps_pings"]]
 
 
 # Join with upto2018
