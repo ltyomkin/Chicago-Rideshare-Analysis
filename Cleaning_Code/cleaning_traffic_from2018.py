@@ -108,4 +108,23 @@ traffic_full = pd.concat([traffic_upto2018,traffic_from2018])
 traffic_full["traffic_id"] = traffic_full.timestamp_id.strftime('%Y-%m-%d %H') + str(traffic_full.segment_id)
 
 # Export final traffic data
+
 traffic_full.to_csv(r"full_traffic_data.csv")
+
+# Export to bucket
+
+from google.cloud import storage
+
+def upload_blob(bucket_name, source_file_name, destination_blob_name):
+    """Uploads a file to the bucket."""
+    storage_client = storage.Client()
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(destination_blob_name)
+
+    blob.upload_from_filename(source_file_name)
+
+    print('File {} uploaded to {}.'.format(
+        source_file_name,
+        destination_blob_name))
+    
+upload_blob("rideshare-csvs", "full_traffic_data.csv", "rideshare_data")
