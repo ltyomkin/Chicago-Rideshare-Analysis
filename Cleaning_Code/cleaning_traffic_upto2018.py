@@ -17,18 +17,8 @@ traffic_df.timestamp_id = pd.to_datetime(traffic_df.timestamp_id)
 
 # Filter out dates
 min_date = '2014-01-01'
-max_date = '2019-10-31'
+max_date = '2018-02-27'
 traffic_df = traffic_df[(traffic_df['timestamp_id'] >= min_date) & (traffic_df['timestamp_id'] <= max_date)]
-
-# Create multi index
-
-dates = pd.period_range(min_date,
-                        max_date, freq = "H")
-
-segments = traffic_df['segment_id'].unique()
-
-idx = pd.MultiIndex.from_product((dates, segments),
-                                 names=['timestamp_id', 'segment_id'])
 
 # Aggregate timestamp by hour
 
