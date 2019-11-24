@@ -1,7 +1,9 @@
-
+import math
 import pandas as pd
 
 segments = pd.read_csv("clean_segment_data.csv")
+
+segments.columns = segments.columns.to_series().apply(lambda x: x.strip())
 
 segments = segments[["segment_id",
                      "start_latitude",
@@ -16,12 +18,31 @@ segments["centroid_lon"] = segments["start_longitude"] + segments["end_longitude
 
 regions = pd.read_csv("clean_taxi_trips.csv", nrows = 1000)
 
-starts = pd.data.frame("location" = regions.pickup_centroid_location.unique())
-ends = pd.data.frame("location" = regions.dropoff_centroid_location.unique())
+starts = pd.DataFrame({"location" : regions.pickup_centroid_location.unique()})
+ends = pd.DataFrame({"location" : regions.dropoff_centroid_location.unique()})
 
-regions = pd.data.frame("location" = pd.concat(starts,ends, axis = 1).unique())
+r = pd.concat((starts,ends))
 
-regions["region"] = range(len(regions))
+regions = pd.DataFrame({"location" : r["location"].unique()})
+
+# Split point. Source: https://chrisalbon.com/python/data_wrangling/pandas_split_lat_and_long_into_variables/
+
+# Create two lists for the loop results to be placed
+lat = []
+lon = []
+
+# For each row in a varible,
+for row in regions['location']:
+        la = row.split(' ')[1].replace("(","")
+        lo = row.split(' ')[2].replace(")","")
+        lat.append(float(la))
+        lon.append(float(lo))
+
+# Create two new columns from lat and lon
+reg = pd.DataFrame({"latitude" : lat,
+                    "longitude" : lon})
+
+reg["region"] = range(len(regions))
 
 
 # Function to calculate distance
@@ -46,8 +67,8 @@ distance_dic = {}
 for segment in range(len(segments)):
     s_id = segments["segment_id"][segment]
     distances = []
-    for region in range(len(regions)):
-        distances[region] = haversine(regions["location"][region],
+    for region in range(len(reg)):
+        distances[region] = haversine((reg["longitude"][region], reg["latitude"][region]),
                                      (segments["centroid_lon"], segments["centroid_lat"]))
     distance_dic[s_id] = distances
 
@@ -56,8 +77,8 @@ for k,v in distance_dic.items():
     seg_region = regions["region"][v.index(min(v))]
     region_dic[k] = seg_region
 
-segment_regions = pd.data.frame("segment_id" = region_dic.keys(),
-                                "region" = region_dic.values())
+segment_regions = pd.DataFrame({"segment_id" : region_dic.keys(),
+                                "region" : region_dic.values()})
 
 # Export
 

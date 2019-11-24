@@ -13,6 +13,7 @@ traffic_from2018_df.columns = ["timestamp_id",
                       "to_street",
                       "length",
                       "street_heading",
+                      "comments"
                       "bus_count",
                       "gps_pings",
                       "hour",
