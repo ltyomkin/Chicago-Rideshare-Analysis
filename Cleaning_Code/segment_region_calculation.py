@@ -1,7 +1,7 @@
 
 import pandas as pd
 
-segments = pd.read_csv("cleaned_segments.csv")
+segments = pd.read_csv("clean_segment_data.csv")
 
 segments = segments[["segment_id",
                      "start_latitude",
@@ -14,7 +14,7 @@ segments = segments[["segment_id",
 segments["centroid_lat"] = segments["start_latitude"] + segments["end_latitude"] / 2
 segments["centroid_lon"] = segments["start_longitude"] + segments["end_longitude"] / 2
 
-regions = pd.read_csv("cleaned_trips")
+regions = pd.read_csv("clean_taxi_trips.csv", nrows = 1000)
 
 starts = pd.data.frame("location" = regions.pickup_centroid_location.unique())
 ends = pd.data.frame("location" = regions.dropoff_centroid_location.unique())

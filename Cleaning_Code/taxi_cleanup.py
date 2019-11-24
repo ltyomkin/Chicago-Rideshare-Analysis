@@ -1,6 +1,6 @@
 import pandas as pd
 
-taxi_trip_df = pd.read_csv("taxi_trips.csv")
+taxi_trip_df = pd.read_csv("taxi_trips.csv", nrows = 1000)
 
 columns_to_delete = ["Taxi ID",
                      "Pickup Community Area",
