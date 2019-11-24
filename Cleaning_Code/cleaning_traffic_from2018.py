@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-traffic_from2018_df = pd.read_csv("traffic_from_2018.csv")
+traffic_from2018_df = pd.read_csv("traffic_from_2018.csv", nrows = 1000)
 
 # Change names
 traffic_from2018_df.columns = ["timestamp_id",
@@ -88,7 +88,7 @@ traffic_from2018 = filled_df[["segment_id",
 
 # Load upto2018
 
-traffic_upto2018_df = pd.read_csv("traffic_upto_2018.csv")
+traffic_upto2018_df = pd.read_csv("traffic_upto_2018.csv", nrows = 1000)
 
 # Change column names
 
