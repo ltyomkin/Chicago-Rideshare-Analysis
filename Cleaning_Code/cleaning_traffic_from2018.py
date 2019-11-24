@@ -65,8 +65,8 @@ traffic_from2018_df = traffic_from2018_df.reset_index()
 # Fill missing hours
 filled_df = (traffic_from2018_df.set_index('timestamp_id')
              .groupby('segment_id')
-             .apply(lambda d: d.reindex(pd.date_range(min(traffic_df.timestamp_id),
-                                                      max(traffic_df.timestamp_id),
+             .apply(lambda d: d.reindex(pd.date_range(min(traffic_from2018_df.timestamp_id),
+                                                      max(traffic_from2018_df.timestamp_id),
                                                       freq='H')))
              .drop('segment_id', axis=1)
              .reset_index('segment_id')
