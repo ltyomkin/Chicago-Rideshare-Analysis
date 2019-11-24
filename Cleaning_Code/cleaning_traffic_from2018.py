@@ -1,4 +1,4 @@
-
+import numpy as np
 import pandas as pd
 
 traffic_from2018_df = pd.read_csv("traffic_from_2018.csv")
@@ -155,7 +155,9 @@ traffic_full = traffic_full.drop("segment_id")
 
 # Regroup by region
 
-agg_dic = {"bus_count" : "sum", "gps_pings" : "sum", "speed" : "max"}
+wm = lambda x: np.average(x, weights=traffic_full.loc[x.index, "bus_count"])
+
+agg_dic = {"bus_count" : "sum", "gps_pings" : "sum", "speed" : "wm"}
 
 traffic_full = traffic_full.groupby(['region','timestamp_id']).agg(agg_dic).ffill()
 
