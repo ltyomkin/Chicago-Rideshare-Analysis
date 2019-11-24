@@ -9,6 +9,11 @@ segments = segments[["segment_id",
                      "end_latitude",
                      "end_longitude"]]
 
+# Get mid point between end and start of segments
+# Average can be used because locations are close enough together
+segments["centroid_lat"] = segments["start_latitude"] + segments["end_latitude"] / 2
+segments["centroid_lon"] = segments["start_longitude"] + segments["end_longitude"] / 2
+
 regions = pd.read_csv("cleaned_trips")
 
 starts = pd.data.frame("location" = regions.pickup_centroid_location.unique())
@@ -35,6 +40,25 @@ def haversine(coord1, coord2):
     
     return 2*R*math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
+# Find closes region to each segment centroid
 
+distance_dic = {}
+for segment in range(len(segments)):
+    s_id = segments["segment_id"][segment]
+    distances = []
+    for region in range(len(regions)):
+        distances[region] = haversine(regions["location"][region],
+                                     (segments["centroid_lon"], segments["centroid_lat"]))
+    distance_dic[s_id] = distances
+
+region_dic = {}
+for k,v in distance_dic.items():
+    seg_region = regions["region"][v.index(min(v))]
+    region_dic[k] = seg_region
+
+segment_regions = pd.data.frame("segment_id" = region_dic.keys(),
+                                "region" = region_dic.values())
+
+# Export
 
 segment_regions.to_csv(r"segment_region_lookup.csv")
