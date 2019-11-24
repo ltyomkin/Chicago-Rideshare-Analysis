@@ -1,6 +1,6 @@
 import pandas as pd
 
-segment_df = pd.read_csv("~/Downloads/Segment_Data.csv")
+segment_df = pd.read_csv("segments.csv")
 
 segment_df.rename(columns = {'SEGMENTID':'segment_id'}, inplace = True) 
 

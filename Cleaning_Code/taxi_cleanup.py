@@ -1,18 +1,15 @@
 import pandas as pd
-from datetime import datetime, timedelta
 
-taxi_trip_df = pd.read_csv("Taxi_Trips.csv")
+taxi_trip_df = pd.read_csv("taxi_trips.csv", nrows = 1000)
 
-columns_to_delete = ["taxi id",
-                     "pickup community area",
-                     "dropoff community area",
-                     "company",
-                     "pickup centroid latitude",
-                     "pickup centroid longitude",
-                     "pickup centroid location",
-                     "dropoff centroid latitude",
-                     "dropoff centroid longitude",
-                     "dropoff centroid location"]
+columns_to_delete = ["Taxi ID",
+                     "Pickup Community Area",
+                     "Dropoff Community Area",
+                     "Company",
+                     "Pickup Centroid Latitude",
+                     "Pickup Centroid Longitude",
+                     "Dropoff Centroid Latitude",
+                     "Dropoff Centroid Longitude",]
 
 new_column_names = ["trip_id", 
            "start_timestamp_id", 
@@ -26,37 +23,39 @@ new_column_names = ["trip_id",
            "tolls", 
            "extra_charges", 
            "trip_total", 
-           "payment_type"]
+           "payment_type",
+           "pickup_centroid_location",
+           "dropoff_centroid_location"]
 
-columns_to_add = ["ride_type_id",
-                  "start_segment_id", 
-                  "end_segment_id"] 
-
-taxi_trip_df.drop(columns_to_delete, axis = 1)
+taxi_trip_df = taxi_trip_df.drop(columns_to_delete, axis = 1)
 taxi_trip_df.columns = new_column_names
-taxi_trip_df = pd.concat([taxi_trip_df, columns_to_add], axis = 2)
+taxi_trip_df["ride_type_id"] = 1
 
-taxi_trip_df = ["taxi id",
+taxi_trip_df = taxi_trip_df[["trip_id",
                 "ride_type_id",
-                "pickup community area",
-                "dropoff community area",
-                "company",
-                "pickup centroid latitude",
-                "pickup centroid longitude",
-                "pickup centroid location",
-                "dropoff centroid latitude",
-                "dropoff centroid longitude",
-                "dropoff centroid location",
-                "start_segment_id", 
-                "end_segment_id"]
+                "start_timestamp_id",
+                "end_timestamp_id",
+                "duration_seconds",
+                "miles",
+                "fare",
+                "tip",
+                "tolls",
+                "extra_charges",
+                "trip_total",
+                "payment_type",
+                "start_census_tract",
+                "end_census_tract",
+                "pickup_centroid_location",
+                "dropoff_centroid_location"]]
+
+taxi_trip_df.start_timestamp_id = pd.to_datetime(taxi_trip_df.start_timestamp_id)
+taxi_trip_df.end_timestamp_id = pd.to_datetime(taxi_trip_df.end_timestamp_id)
 
 def hour_rounder(t):
-  return (t.replace(second=0, microsecond=0, minute=0, hour=t.hour) + timedelta(hours=t.minute//60)
+  return (t.dt.floor('H'))
 
 taxi_trip_df.start_timestamp_id = hour_rounder(pd.to_datetime(taxi_trip_df.start_timestamp_id))
 taxi_trip_df.end_timestamp_id = hour_rounder(pd.to_datetime(taxi_trip_df.end_timestamp_id))
 
-taxi_trip_df["ride_type_id"] = 1
-
-taxi_trip_df.ro_csv(r"clean_taxi_trip_data.csv")
+taxi_trip_df.to_csv(r"clean_taxi_trips.csv")
 
