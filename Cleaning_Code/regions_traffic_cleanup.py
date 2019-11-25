@@ -63,7 +63,6 @@ filled_df = (traffic_from2018_df.set_index('timestamp_id')
                                                       freq='H')))
              .drop('region_id', axis=1)
              .reset_index('region_id')
-             .groupby('region_id')
              .ffill())
 
 fill_values = {"bus_count" : 0, "gps_pings" : 0, "speed" : -1}
@@ -73,6 +72,7 @@ filled_df = filled_df.fillna(value = fill_values)
 # Reorder columns
 filled_df["timestamp_id"] = filled_df.index
 filled_df = filled_df.reset_index()
+
 traffic_from2018 = filled_df[["region_id",
                               "timestamp_id",
                               "speed",
@@ -121,7 +121,6 @@ filled_df = (traffic_upto2018_df.set_index('timestamp_id')
                                                       freq='H')))
              .drop('region_id', axis=1)
              .reset_index('region_id')
-             .groupby('region_id')
              .ffill())
              
 traffic_upto2018 = filled_df.fillna(value = fill_values)
@@ -133,7 +132,7 @@ traffic_upto2018 = traffic_upto2018[["region_id","timestamp_id","speed","bus_cou
 
 # Join with upto2018
 
-traffic_full = pd.concat([traffic_upto2018,traffic_from2018])
+traffic_full = pd.concat([traffic_upto2018,traffic_from2018], ignore_index = True)
 
 # Add speed category
 def speed_condition(c):
@@ -150,11 +149,8 @@ def speed_condition(c):
 
 traffic_full["speed_category"] = traffic_full.apply(speed_condition, axis = 1)
 
-# create traffic unique id
-traffic_full["traffic_id"] = traffic_full.timestamp_id.apply(lambda x: x.strftime('%d%m%Y%H')) + " " + str(traffic_full.region_id)
-
 # Reorder
-traffic_full = traffic_full[["traffic_id","region_id","timestamp_id","speed","speed_category","bus_count","gps_pings"]]
+traffic_full = traffic_full[["region_id","timestamp_id","speed","speed_category","bus_count","gps_pings"]]
 
 # Export final traffic data
 
