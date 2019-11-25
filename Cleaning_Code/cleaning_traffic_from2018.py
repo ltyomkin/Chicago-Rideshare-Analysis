@@ -13,7 +13,7 @@ traffic_from2018_df.columns = ["timestamp_id",
                       "to_street",
                       "length",
                       "street_heading",
-                      "comments"
+                      "comments",
                       "bus_count",
                       "gps_pings",
                       "hour",
@@ -27,8 +27,9 @@ traffic_from2018_df.columns = ["timestamp_id",
                       "start_location",
                       "end_location"]
 
+
 # Remove columns
-traffic_from2018_df.drop(["street",
+traffic_from2018_df = traffic_from2018_df.drop(["street",
                   "direction",
                   "from_street",
                   "to_street",
@@ -44,14 +45,14 @@ traffic_from2018_df.drop(["street",
                   "end_longitude"],
                  axis = 1)
 
+# Change timestamp to datetime
+traffic_from2018_df.timestamp_id = pd.to_datetime(traffic_from2018_df.timestamp_id)
+
 # Filter out dates
 min_date = '2018-02-28'
 max_date = '2018-10-31'
 traffic_from2018_df = traffic_from2018_df[(traffic_from2018_df['timestamp_id'] >= min_date) &
                         (traffic_from2018_df['timestamp_id'] <= max_date)]
-
-# Change timestamp to datetime
-traffic_from2018_df.timestamp_id = pd.to_datetime(traffic_from2018_df.timestamp_id)
 
 # Aggregate timestamp by hour
 traffic_from2018_df = traffic_from2018_df.set_index('timestamp_id')
