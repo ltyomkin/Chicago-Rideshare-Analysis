@@ -1,6 +1,6 @@
 import pandas as pd
 
-taxi_trip_df = pd.read_csv("taxi_trips.csv", nrows = 1000)
+taxi_trip_df = pd.read_csv("~/taxi_trips.csv")
 
 columns_to_delete = ["Taxi ID",
                      "Pickup Community Area",
@@ -57,5 +57,5 @@ def hour_rounder(t):
 taxi_trip_df.start_timestamp_id = hour_rounder(pd.to_datetime(taxi_trip_df.start_timestamp_id))
 taxi_trip_df.end_timestamp_id = hour_rounder(pd.to_datetime(taxi_trip_df.end_timestamp_id))
 
-taxi_trip_df.to_csv(r"clean_taxi_trips.csv")
+taxi_trip_df.to_csv(r"~/clean_taxi_trips.csv")
 

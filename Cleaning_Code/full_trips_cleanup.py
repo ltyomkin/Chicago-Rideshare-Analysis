@@ -1,7 +1,7 @@
 import pandas as pd
 
-full_trips = pd.read_csv("cleaned_full_trips.csv")
-trip_region = pd.read_csv("trip_region_lookup.csv")
+full_trips = pd.read_csv("~/cleaned_full_trips.csv")
+trip_region = pd.read_csv("~/trip_region_lookup.csv")
 
 full_trips = full_trips.fillna("Missing")
 
@@ -29,4 +29,4 @@ full_trips = full_trips.drop(["Unnamed: 0_x",
                              axis = 1,
                              errors = "ignore")
 
-full_trips.to_csv(r"cleaned_full_trips.csv")
+full_trips.to_csv(r"~/cleaned_full_trips.csv")

@@ -1,6 +1,6 @@
 import pandas as pd
 
-regions_df = pd.read_csv("regions.csv")
+regions_df = pd.read_csv("~/regions.csv")
 
 regions_df.rename(columns = {'REGIONID':'region_id'}, inplace = True) 
 
@@ -12,4 +12,4 @@ regions_df = regions_df.drop(["current_speed","last_updated","description", "eas
 
 regions_df = regions_df[["region_id","region","west","north"]]
 
-regions_df.to_csv(r"clean_regions.csv")
+regions_df.to_csv(r"~/clean_regions.csv")

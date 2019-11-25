@@ -2,7 +2,7 @@ import math
 import pandas as pd
 
 
-base_regions = pd.read_csv("clean_regions.csv")
+base_regions = pd.read_csv("~/clean_regions.csv")
 
 base_regions.columns = base_regions.columns.to_series().apply(lambda x: x.strip())
 
@@ -12,7 +12,7 @@ base_regions = base_regions[["region_id",
 
 base_regions.dropna()
 
-trip_regions = pd.read_csv("cleaned_full_trips.csv")
+trip_regions = pd.read_csv("~/cleaned_full_trips.csv")
 
 starts = pd.DataFrame({"location" : trip_regions.pickup_centroid_location.unique()})
 ends = pd.DataFrame({"location" : trip_regions.dropoff_centroid_location.unique()})
@@ -90,4 +90,4 @@ trips_regions = trips_regions.append(missing_region, ignore_index = True)
 
 # Export
 
-trips_regions.to_csv(r"trip_region_lookup.csv")
+trips_regions.to_csv(r"~/trip_region_lookup.csv")

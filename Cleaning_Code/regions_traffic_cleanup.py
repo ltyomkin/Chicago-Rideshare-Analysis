@@ -1,6 +1,6 @@
 import pandas as pd
 
-traffic_from2018_df = pd.read_csv("region_traffic_from_2018.csv", nrows = 1000)
+traffic_from2018_df = pd.read_csv("~/region_traffic_from_2018.csv")
 
 # Change names
 traffic_from2018_df.columns = ["timestamp_id",
@@ -81,7 +81,7 @@ traffic_from2018 = filled_df[["region_id",
 
 # Load upto2018
 
-traffic_upto2018_df = pd.read_csv("region_traffic_upto_2018.csv", nrows = 1000)
+traffic_upto2018_df = pd.read_csv("~/region_traffic_upto_2018.csv")
 
 # Change column names
 
@@ -158,4 +158,4 @@ traffic_full = traffic_full[["traffic_id","region_id","timestamp_id","speed","sp
 
 # Export final traffic data
 
-traffic_full.to_csv(r"clean_full_traffic_data.csv")
+traffic_full.to_csv(r"~/clean_full_traffic_data.csv")
