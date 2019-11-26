@@ -133,7 +133,7 @@ traffic_upto2018 = traffic_upto2018[["region_id","timestamp_id","speed","bus_cou
 # Join with upto2018
 
 traffic_full = pd.concat([traffic_upto2018,traffic_from2018], ignore_index = True)
-
+    
 # Add speed category
 def speed_condition(c):
   if c['speed'] == -1:

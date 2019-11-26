@@ -31,3 +31,12 @@ Run scripts (this way we can close the terminal and it will keep running)
 	nohup python ~/Chicago-Rideshare-Analysis/Cleaning_Code/<SCRIPT>.py &
 	<ENTER>
 	- Note: to check for errors and other messages, look inside nohup.out by calling "cat nohup.out"
+
+Check if scripts are still running
+	ps -ef | grep "file name"
+
+Check if files have been exported correctly
+	ls -l
+
+With the process ID from ps -ef, check memory usage:
+	sudo pmap <PID> | tail -n 1
