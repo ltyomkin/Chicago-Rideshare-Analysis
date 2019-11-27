@@ -32,4 +32,4 @@ full_trips = full_trips.drop(["Unnamed: 0_x",
 
 full_trips = full_trips("Missing", "", inplace = True)
 
-full_trips.to_csv(r"~/cleaned_full_trips.csv")
+full_trips.to_csv(r"~/cleaned_full_trips_final.csv")
