@@ -3,7 +3,7 @@ import pandas as pd
 full_trips = pd.read_csv("~/cleaned_full_trips.csv")
 trip_region = pd.read_csv("~/trip_region_lookup.csv")
 
-full_trips = full_trips.fillna("Missing")
+full_trips = full_trips.fillna("Missing", inplace = True)
 
 ### REMOVE
 missing_region = pd.DataFrame({"trip_region_id" : [max(trip_region["trip_region_id"])+1],
@@ -27,6 +27,9 @@ full_trips = full_trips.drop(["Unnamed: 0_x",
                               "trip_centroids",
                               "base_region_id"],
                              axis = 1,
-                             errors = "ignore")
+                             errors = "ignore",
+                             inplace = True)
+
+full_trips = full_trips("Missing", "", inplace = True)
 
 full_trips.to_csv(r"~/cleaned_full_trips.csv")
