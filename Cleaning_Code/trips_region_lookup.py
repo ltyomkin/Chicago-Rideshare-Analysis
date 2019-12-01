@@ -90,4 +90,4 @@ trips_regions = trips_regions.append(missing_region, ignore_index = True)
 
 # Export
 
-trips_regions.to_csv(r"~/trip_region_lookup.csv")
+trips_regions.to_csv(r"~/trip_region_lookup.csv", index = False)
