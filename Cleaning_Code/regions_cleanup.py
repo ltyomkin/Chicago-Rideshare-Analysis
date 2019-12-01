@@ -12,4 +12,4 @@ regions_df = regions_df.drop(["current_speed","last_updated","description", "eas
 
 regions_df = regions_df[["region_id","region","west","north"]]
 
-regions_df.to_csv(r"~/clean_regions.csv")
+regions_df.to_csv(r"~/clean_regions.csv", index = False)
