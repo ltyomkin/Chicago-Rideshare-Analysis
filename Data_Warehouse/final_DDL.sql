@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`dim_trip_region` (
   `base_region_id` INT(3) NULL,
   `trip_centroids` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`trip_centroids`),
-  INDEX `base_region_id_idx` (`base_region_id` ASC) VISIBLE,
+  INDEX `base_region_id_idx` (`base_region_id` ASC),
   CONSTRAINT `base_region_id`
     FOREIGN KEY (`base_region_id`)
     REFERENCES `mydb`.`dim_base_region` (`base_region_id`)
@@ -76,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`trips` (
   `pickup_centroid_location` VARCHAR(45) NULL,
   `dropoff_centroid_location` VARCHAR(45) NULL,
   PRIMARY KEY (`trip_id`),
-  INDEX `start_timestamp_id_idx` (`start_timestamp_id` ASC) VISIBLE,
-  INDEX `end_timestamp_id_idx` (`end_timestamp_id` ASC) VISIBLE,
-  INDEX `pickup_centroid_location_idx` (`pickup_centroid_location` ASC) VISIBLE,
-  INDEX `dropoff_centroid_location_idx` (`dropoff_centroid_location` ASC) VISIBLE,
+  INDEX `start_timestamp_id_idx` (`start_timestamp_id` ASC),
+  INDEX `end_timestamp_id_idx` (`end_timestamp_id` ASC),
+  INDEX `pickup_centroid_location_idx` (`pickup_centroid_location` ASC),
+  INDEX `dropoff_centroid_location_idx` (`dropoff_centroid_location` ASC),
   CONSTRAINT `start_timestamp_id`
     FOREIGN KEY (`start_timestamp_id`)
     REFERENCES `mydb`.`dim_time` (`timestamp_id`)
@@ -115,8 +115,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`dim_traffic` (
   `bus_count` INT NULL,
   `gps_pings` INT NULL,
   PRIMARY KEY (`traffic_id`),
-  INDEX `region_id_idx` (`region_id` ASC) VISIBLE,
-  INDEX `timestamp_id_idx` (`timestamp_id` ASC) VISIBLE,
+  INDEX `region_id_idx` (`region_id` ASC),
+  INDEX `timestamp_id_idx` (`timestamp_id` ASC),
   CONSTRAINT `region_id`
     FOREIGN KEY (`region_id`)
     REFERENCES `mydb`.`dim_base_region` (`base_region_id`)
