@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `rideshare_snowflake`.`dim_trip_region` (
   `trip_region_id` INT(5) NULL,
   `base_region_id` INT(3) NULL,
-  `trip_centroids` VARCHAR(45) NOT NULL,
+  `trip_centroids` POINT NOT NULL,
   PRIMARY KEY (`trip_centroids`),
   INDEX `base_region_id_idx` (`base_region_id` ASC),
   CONSTRAINT `base_region_id`
@@ -61,20 +61,21 @@ ENGINE = InnoDB;
 -- Table `rideshare_snowflake`.`trips`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rideshare_snowflake`.`trips` (
-  `trip_id` INT(20) NOT NULL,
+  `Index` INT NULL,
+  `trip_id` VARCHAR(45) NOT NULL,
   `ride_type_id` INT(2) NOT NULL,
   `start_timestamp_id` TIMESTAMP NOT NULL,
   `end_timestamp_id` TIMESTAMP NOT NULL,
-  `duration_seconds` INT(20) NULL,
-  `miles` INT(4) NULL,
-  `fare` INT(4) NULL,
-  `tip` INT(4) NULL,
-  `tolls` INT(4) NULL,
-  `extra_charges` INT(4) NULL,
-  `trip_total` INT(4) NULL,
+  `duration_seconds` FLOAT NULL,
+  `miles` FLOAT NULL,
+  `fare` FLOAT NULL,
+  `tip` FLOAT NULL,
+  `tolls` FLOAT NULL,
+  `extra_charges` FLOAT NULL,
+  `trip_total` FLOAT NULL,
   `payment_type` VARCHAR(45) NULL,
-  `pickup_centroid_location` VARCHAR(45) NULL,
-  `dropoff_centroid_location` VARCHAR(45) NULL,
+  `pickup_centroid_location` POINT NULL,
+  `dropoff_centroid_location` POINT NULL,
   PRIMARY KEY (`trip_id`),
   INDEX `start_timestamp_id_idx` (`start_timestamp_id` ASC),
   INDEX `end_timestamp_id_idx` (`end_timestamp_id` ASC),
@@ -107,10 +108,10 @@ ENGINE = InnoDB;
 -- Table `rideshare_snowflake`.`dim_traffic`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `rideshare_snowflake`.`dim_traffic` (
-  `traffic_id` VARCHAR(45) NOT NULL,
-  `region_id` INT(12) NOT NULL,
+  `traffic_id` INT(10) NOT NULL,
+  `region_id` INT(3) NOT NULL,
   `timestamp_id` TIMESTAMP NOT NULL,
-  `speed` INT NULL,
+  `speed` FLOAT NULL,
   `speed_category` VARCHAR(45) NULL,
   `bus_count` INT NULL,
   `gps_pings` INT NULL,
