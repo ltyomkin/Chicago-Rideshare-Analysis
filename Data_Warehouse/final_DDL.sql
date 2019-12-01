@@ -46,7 +46,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `rideshare_snowflake`.`dim_trip_region` (
   `trip_region_id` INT(5) NULL,
   `base_region_id` INT(3) NULL,
-  `trip_centroids` POINT NOT NULL,
+  `trip_centroids` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`trip_centroids`),
   INDEX `base_region_id_idx` (`base_region_id` ASC),
   CONSTRAINT `base_region_id`
@@ -74,8 +74,8 @@ CREATE TABLE IF NOT EXISTS `rideshare_snowflake`.`trips` (
   `extra_charges` FLOAT NULL,
   `trip_total` FLOAT NULL,
   `payment_type` VARCHAR(45) NULL,
-  `pickup_centroid_location` POINT NULL,
-  `dropoff_centroid_location` POINT NULL,
+  `pickup_centroid_location` VARCHAR(45) NULL,
+  `dropoff_centroid_location` VARCHAR(45) NULL,
   PRIMARY KEY (`trip_id`),
   INDEX `start_timestamp_id_idx` (`start_timestamp_id` ASC),
   INDEX `end_timestamp_id_idx` (`end_timestamp_id` ASC),
@@ -102,7 +102,6 @@ CREATE TABLE IF NOT EXISTS `rideshare_snowflake`.`trips` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `rideshare_snowflake`.`dim_traffic`
