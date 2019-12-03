@@ -27,6 +27,10 @@ Import files (already in bucket):
 Make scripts executable:
 	chmod +x ~/Chicago-Rideshare-Analysis/Cleaning_Code/*
 
+
+To run scripts automatically, run auto_pipeline.sh
+
+######### Steps to run scripts one by one ################################
 Run scripts (this way we can close the terminal and it will keep running)
 	nohup python ~/Chicago-Rideshare-Analysis/Cleaning_Code/<SCRIPT>.py &
 	<ENTER>

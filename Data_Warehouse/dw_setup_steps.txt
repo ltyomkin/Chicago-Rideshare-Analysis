@@ -1,0 +1,10 @@
+1- Create MySQL instance in GCP (+50GB)
+
+2- Import final_DDL.sql to setup DW structure
+
+3- Import each csv in order:
+	1- headerless_clean_regions.csv -> dim_base_region
+	2- trip_region_lookup.csv -> dim_trip_region
+	3- dim_date.csv -> dim_time
+	4- clean_full_traffic_data.csv -> dim_traffic
+	5- final_trips.csv -> trips
