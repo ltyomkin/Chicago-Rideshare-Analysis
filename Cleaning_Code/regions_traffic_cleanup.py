@@ -154,4 +154,4 @@ traffic_full = traffic_full[["region_id","timestamp_id","speed","speed_category"
 
 # Export final traffic data
 
-traffic_full.to_csv(r"~/clean_full_traffic_data.csv")
+traffic_full.to_csv(r"~/clean_full_traffic_data.csv", header = False)

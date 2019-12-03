@@ -12,4 +12,6 @@ regions_df = regions_df.drop(["current_speed","last_updated","description", "eas
 
 regions_df = regions_df[["region_id","region","west","north"]]
 
-regions_df.to_csv(r"~/clean_regions.csv", index = False)
+regions_df.to_csv(r"~/clean_regions.csv", index = False) # To be used in other calculations
+
+regions_df.to_csv(r"~/headerless_clean_regions.csv", index = False, header = False) # Actual DW table for dim_base_region
