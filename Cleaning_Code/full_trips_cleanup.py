@@ -1,3 +1,6 @@
+############################## This script has been disposed because the VM doesn't have enough memory ##################
+############################## Having more memory OR splitting this script could solve that problem, but the DW would need adjusting ##################
+
 import pandas as pd
 
 full_trips = pd.read_csv("~/cleaned_full_trips.csv")

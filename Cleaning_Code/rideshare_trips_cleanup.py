@@ -1,6 +1,6 @@
 import pandas as pd
 
-rideshare_trips_df = pd.read_csv("~/rideshare_trips.csv", nrows = 1000)
+rideshare_trips_df = pd.read_csv("~/rideshare_trips.csv")
 
 columns_to_delete = ["Pickup Community Area",
                      "Dropoff Community Area",
@@ -58,5 +58,3 @@ rideshare_trips_df.start_timestamp_id = hour_rounder(pd.to_datetime(rideshare_tr
 rideshare_trips_df.end_timestamp_id = hour_rounder(pd.to_datetime(rideshare_trips_df.end_timestamp_id))
 
 rideshare_trips_df.to_csv(r"~/clean_rideshare_trips.csv")
-
-
