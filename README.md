@@ -34,6 +34,22 @@ This project is a look at the impact of rideshare transportation on traffic in t
   
 - Analysis
   * Tableau
+
+## Our Automation Process
+1. Create MySQL instance in GCP (+50GB)
+2. Import final_DDL.sql to setup DW structure
+3. Import each csv in order:
+
+	i. headerless_clean_regions.csv -> dim_base_region
+ 
+	ii. trip_region_lookup.csv -> dim_trip_region
+ 
+	iii. dim_date.csv -> dim_time
+ 
+	iv. clean_full_traffic_data.csv -> dim_traffic
+ 
+	v. final_trips.csv -> trips
+
   
 ## List of Data Sources
 
