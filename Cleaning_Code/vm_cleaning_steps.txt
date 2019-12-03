@@ -40,3 +40,6 @@ Check if files have been exported correctly
 
 With the process ID from ps -ef, check memory usage:
 	sudo pmap <PID> | tail -n 1
+Or just use this command to see updated memory usage by computations or cache:
+	watch free -m
+	(to exit, ctrl+c)
